@@ -2,9 +2,9 @@
 // At its basic, a component is just a function that returns JSX
 import React from 'react'
 
-const person = () => {
+const person = (props) => {
     // Output dynamic content within JSX. It must be wrapped in {}.
-    return <p>I'm a Person and I am {Math.floor(Math.random() * 30)} years old!</p>
+    return <p>I'm {props.name} and I am {props.age} years old!</p>
 }
 
 export default person;
