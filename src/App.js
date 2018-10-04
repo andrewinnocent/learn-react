@@ -13,8 +13,20 @@ class App extends Component {
   }
 
   switchNameHandler = () => {
-    console.log('Clicked!')
+    // console.log('Clicked!')
+    // 'this' refers to the class because it's inside an arrow function. IMPORTANT!
+    // DON'T DO THIS: this.state.persons[0].name = 'John'
+    this.setState(
+      {
+        persons: [
+          {name: 'John', age: 32},
+          {name: 'Rachelle', age: 25},
+          {name: 'Drew', age: 21}
+        ]
+      }
+    )
   }
+
   render() {
     return (
       <div className="App">
