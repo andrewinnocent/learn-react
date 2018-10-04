@@ -12,11 +12,15 @@ class App extends Component {
     ]
   }
 
+  switchNameHandler = () => {
+    console.log('Clicked!')
+  }
   render() {
     return (
       <div className="App">
         <h1>Hi! I'm a react app!</h1>
         <p>This really works!</p>
+        <button onClick={this.switchNameHandler}>Switch Name</button> {/* NOTICE the function isn't being invoked (). If it was, it would execute as soon as component is rendered. This isn't the behavior desired here. */}
         <Person name={this.state.persons[0].name} age={this.state.persons[0].age}/>
         <Person name={this.state.persons[1].name} age={this.state.persons[1].age}>My Hobbies: Hiking</Person>
         <Person name={this.state.persons[2].name} age={this.state.persons[2].age}/>
