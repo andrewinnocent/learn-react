@@ -21,26 +21,48 @@ class App extends Component {
         persons: [
           {name: newName, age: 32},
           {name: 'Rachelle', age: 25},
-          {name: 'Drew', age: 21}
+          {name: 'Drew', age: 30}
         ]
       }
     )
   }
 
+  nameChangedHandler = (event) => {
+    this.setState(
+      {
+        persons: [
+          {name: 'Andrew', age: 32},
+          {name: event.target.value, age: 25},
+          {name: 'Drew', age: 30}
+        ]
+      }
+    )
+  }
   render() {
+    const style = {
+      backgroundColor: 'white',
+      font: 'inherit',
+      border: '1px solid blue',
+      padding: '8px',
+      cursor: 'pointer'
+    }
+
     return (
       <div className="App">
         <h1>Hi! I'm a react app!</h1>
         <p>This really works!</p>
-        <button onClick={() => this.switchNameHandler('John')}>Switch Name</button> {/* The function is executed on the click instead of the page load. */}
+        <button 
+          style={style}
+          onClick={() => this.switchNameHandler('John')}>Switch Name</button> {/* The function is executed on the click instead of the page load. */}
         <Person
           name={this.state.persons[0].name}
           age={this.state.persons[0].age}/>
         <Person
           name={this.state.persons[1].name}
           age={this.state.persons[1].age}
-          // methods can be passed down to other components
-          click={this.switchNameHandler.bind(this, 'Johnny!')}>My Hobbies: Hiking</Person> {/* .bind() is the preferred way pass a function parameter over the arrow function. */}
+          click={this.switchNameHandler.bind(this, 'Johnny!')}
+          changed={this.nameChangedHandler}>My Hobbies: Hiking</Person> {/* .bind() is preferred over the arrow function to pass a function parameter. */}
+          {/* Only this component has action handlers passed to it. */}
         <Person
           name={this.state.persons[2].name}
           age={this.state.persons[2].age}/>
