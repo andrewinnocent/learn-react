@@ -22,7 +22,8 @@ class App extends Component {
           {name: newName, age: 32},
           {name: 'Rachelle', age: 25},
           {name: 'Drew', age: 30}
-        ]
+        ],
+        showPersons: false
       }
     )
   }
@@ -35,9 +36,14 @@ class App extends Component {
           {name: event.target.value, age: 25},
           {name: 'Drew', age: 30}
         ]
-      }
-    )
+      })
   }
+
+  togglePersonHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({showPersons: !doesShow}) 
+  }
+
   render() {
     const style = {
       backgroundColor: 'white',
@@ -53,19 +59,24 @@ class App extends Component {
         <p>This really works!</p>
         <button 
           style={style}
-          onClick={() => this.switchNameHandler('John')}>Switch Name</button> {/* The function is executed on the click instead of the page load. */}
-        <Person
-          name={this.state.persons[0].name}
-          age={this.state.persons[0].age}/>
-        <Person
-          name={this.state.persons[1].name}
-          age={this.state.persons[1].age}
-          click={this.switchNameHandler.bind(this, 'Johnny!')}
-          changed={this.nameChangedHandler}>My Hobbies: Hiking</Person> {/* .bind() is preferred over the arrow function to pass a function parameter. */}
-          {/* Only this component has action handlers passed to it. */}
-        <Person
-          name={this.state.persons[2].name}
-          age={this.state.persons[2].age}/>
+          onClick={this.togglePersonHandler}>Toggle Persons</button> {/* The function is executed on the click instead of the page load. */}
+        { 
+          this.state.showPersons ?
+            <div>
+              <Person
+                name={this.state.persons[0].name}
+                age={this.state.persons[0].age}/>
+              <Person
+                name={this.state.persons[1].name}
+                age={this.state.persons[1].age}
+                click={this.switchNameHandler.bind(this, 'Johnny!')}
+                changed={this.nameChangedHandler}>My Hobbies: Hiking</Person> {/* .bind() is preferred over the arrow function to pass a function parameter. */}
+                {/* Only this component has action handlers passed to it. */}
+              <Person
+                name={this.state.persons[2].name}
+                age={this.state.persons[2].age}/>
+              </div> : null
+        } {/* null means 'render nothing' here */}
       </div>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi, I\'m a React App)) // Takes at least three parameters: 1. element to render to DOM 2. Config for element in JS 3. Children of element 4... content in element
