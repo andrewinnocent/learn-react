@@ -53,6 +53,27 @@ class App extends Component {
       cursor: 'pointer'
     }
 
+    let persons = null;
+
+    if (this.state.showPersons) {
+      persons = (
+        <div>
+            <Person
+              name={this.state.persons[0].name}
+              age={this.state.persons[0].age}/>
+            <Person
+              name={this.state.persons[1].name}
+              age={this.state.persons[1].age}
+              click={this.switchNameHandler.bind(this, 'Johnny!')}
+              changed={this.nameChangedHandler}>My Hobbies: Hiking</Person> {/* .bind() is preferred over the arrow function to pass a function parameter. */}
+              {/* Only this component has action handlers passed to it. */}
+            <Person
+              name={this.state.persons[2].name}
+              age={this.state.persons[2].age}/>
+          </div>
+      )
+    }
+    
     return (
       <div className="App">
         <h1>Hi! I'm a react app!</h1>
@@ -60,23 +81,7 @@ class App extends Component {
         <button 
           style={style}
           onClick={this.togglePersonHandler}>Toggle Persons</button> {/* The function is executed on the click instead of the page load. */}
-        { 
-          this.state.showPersons ?
-            <div>
-              <Person
-                name={this.state.persons[0].name}
-                age={this.state.persons[0].age}/>
-              <Person
-                name={this.state.persons[1].name}
-                age={this.state.persons[1].age}
-                click={this.switchNameHandler.bind(this, 'Johnny!')}
-                changed={this.nameChangedHandler}>My Hobbies: Hiking</Person> {/* .bind() is preferred over the arrow function to pass a function parameter. */}
-                {/* Only this component has action handlers passed to it. */}
-              <Person
-                name={this.state.persons[2].name}
-                age={this.state.persons[2].age}/>
-              </div> : null
-        } {/* null means 'render nothing' here */}
+        {persons}
       </div>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi, I\'m a React App)) // Takes at least three parameters: 1. element to render to DOM 2. Config for element in JS 3. Children of element 4... content in element
