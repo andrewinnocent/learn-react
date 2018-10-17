@@ -6,9 +6,9 @@ class App extends Component {
   // 'state' (reserved word) is ONLY in classes that extend Component (class-based components).
   state = {
     persons: [
-      {name: 'Andrew', age: 32},
-      {name: 'Rachelle', age: 25},
-      {name: 'Drew', age: 30}
+      {id: 'dkfj12', name: 'Andrew', age: 32},
+      {id: '23xdi2', name: 'Rachelle', age: 25},
+      {id: 'ddkfj2', name: 'Drew', age: 30}
     ]
   }
 
@@ -43,7 +43,8 @@ class App extends Component {
             return <Person
               click={() => this.deletePersonHandler(index)}
               name={person.name}
-              age={person.age} />
+              age={person.age}
+              key={person.id} />
           })}
           </div>
       )
