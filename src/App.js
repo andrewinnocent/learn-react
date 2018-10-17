@@ -12,31 +12,12 @@ class App extends Component {
     ]
   }
 
-  switchNameHandler = (newName) => {
-    // console.log('Clicked!')
-    // 'this' refers to the class because it's inside an arrow function. IMPORTANT!
-    // DON'T DO THIS: this.state.persons[0].name = 'John'
-    this.setState(
-      {
-        persons: [
-          {name: newName, age: 32},
-          {name: 'Rachelle', age: 25},
-          {name: 'Drew', age: 30}
-        ],
-        showPersons: false
-      }
-    )
-  }
-
-  nameChangedHandler = (event) => {
-    this.setState(
-      {
-        persons: [
-          {name: 'Andrew', age: 32},
-          {name: event.target.value, age: 25},
-          {name: 'Drew', age: 30}
-        ]
-      })
+  deletePersonHandler = (personIndex) => {
+    // ALWAYS update state in an immutable fashion (i.e., make a copy of state and manipulate the copy).
+    // const persons = this.state.persons.slice();  // slice() makes a copy of the array
+    const persons = [...this.state.persons];  // ES6 spread operator to add to an array (makes a copy in this case).
+    persons.splice(personIndex, 1);
+    this.setState({persons: persons})
   }
 
   togglePersonHandler = () => {
@@ -58,8 +39,9 @@ class App extends Component {
     if (this.state.showPersons) {
       persons = (
         <div>
-          {this.state.persons.map(person => {
-            return <Person 
+          {this.state.persons.map((person, index) => {
+            return <Person
+              click={() => this.deletePersonHandler(index)}
               name={person.name}
               age={person.age} />
           })}
@@ -73,7 +55,7 @@ class App extends Component {
         <p>This really works!</p>
         <button 
           style={style}
-          onClick={this.togglePersonHandler}>Toggle Persons</button> {/* The function is executed on the click instead of the page load. */}
+          onClick={this.togglePersonHandler}>Toggle Persons</button>
         {persons}
       </div>
     );
