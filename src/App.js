@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person'
-import Validation from './Validation/Validation'
-import Character from './Char/Char'
 
 class App extends Component {
   // 'state' (reserved word) is ONLY in classes that extend Component (class-based components).
@@ -11,7 +9,8 @@ class App extends Component {
       {id: 'dkfj12', name: 'Andrew', age: 32},
       {id: '23xdi2', name: 'Rachelle', age: 25},
       {id: 'ddkfj2', name: 'Drew', age: 30}
-    ]
+    ],
+    showPersons: false
   }
 
   switchNameHandler = (e, id) => {
@@ -71,10 +70,12 @@ class App extends Component {
       style.backgroundColor = 'red';
     };
 
+    let classes = ['red', 'bold'].join(' '); // classes in app.css; returns "red bold"
+
     return (
       <div className="App">
         <h1>Hi! I'm a react app!</h1>
-        <p>This really works!</p>
+        <p className={classes}>This really works!</p>
         <button 
           style={style}
           onClick={this.togglePersonHandler}>Toggle Persons
