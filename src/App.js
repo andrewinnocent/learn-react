@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import Person from './Person/Person'
+import Radium from 'radium';
+import Person from './Person/Person';
 
 class App extends Component {
   // 'state' (reserved word) is ONLY in classes that extend Component (class-based components).
@@ -48,7 +49,11 @@ class App extends Component {
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
     };
 
     let persons = null;
@@ -68,6 +73,10 @@ class App extends Component {
       );
       // Changes button backgroundColor dynamically with showPersons status
       style.backgroundColor = 'red';
+      style[':hover'] = {
+        backgroundColor: 'salmon',
+        color: 'black'
+      };
     };
 
     let classes = []; // classes in app.css; returns "red bold"
@@ -93,4 +102,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Radium(App); // Radium "higher order component" wrapping the App component

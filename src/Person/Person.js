@@ -1,6 +1,7 @@
 // Convention is to capitalize file names for components
 // At its basic, a component is just a function that returns JSX
-import React from 'react'
+import React from 'react';
+import Radium from 'radium';
 import './Person.css';
 
 const person = (props) => {
@@ -14,4 +15,4 @@ const person = (props) => {
     )
 }
 
-export default person;
+export default Radium(person);
