@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import Radium from 'radium';
+import Radium, {StyleRoot} from 'radium';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -88,15 +88,17 @@ class App extends Component {
     }
 
     return (
-      <div className="App">
-        <h1>Hi! I'm a react app!</h1>
-        <p className={classes.join(' ')}>This really works!</p>
-        <button 
-          style={style}
-          onClick={this.togglePersonHandler}>Toggle Persons
-        </button>
-        {persons}
-      </div>
+      <StyleRoot> {/* Needed for media queries, animations, etc. */}
+        <div className="App">
+          <h1>Hi! I'm a react app!</h1>
+          <p className={classes.join(' ')}>This really works!</p>
+          <button 
+            style={style}
+            onClick={this.togglePersonHandler}>Toggle Persons
+          </button>
+          {persons}
+        </div>
+      </StyleRoot>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi, I\'m a React App)) // Takes at least three parameters: 1. element to render to DOM 2. Config for element in JS 3. Children of element 4... content in element
   }
