@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import Radium, {StyleRoot} from 'radium';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -50,10 +49,6 @@ class App extends Component {
       border: '1px solid blue',
       padding: '8px',
       cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black'
-      }
     };
 
     let persons = null;
@@ -73,10 +68,6 @@ class App extends Component {
       );
       // Changes button backgroundColor dynamically with showPersons status
       style.backgroundColor = 'red';
-      style[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'black'
-      };
     };
 
     let classes = []; // classes in app.css; returns "red bold"
@@ -88,7 +79,7 @@ class App extends Component {
     }
 
     return (
-      <StyleRoot> {/* Needed for media queries, animations, etc. */}
+
         <div className="App">
           <h1>Hi! I'm a react app!</h1>
           <p className={classes.join(' ')}>This really works!</p>
@@ -98,10 +89,9 @@ class App extends Component {
           </button>
           {persons}
         </div>
-      </StyleRoot>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi, I\'m a React App)) // Takes at least three parameters: 1. element to render to DOM 2. Config for element in JS 3. Children of element 4... content in element
   }
 }
 
-export default Radium(App); // Radium "higher order component" wrapping the App component
+export default App; // Radium "higher order component" wrapping the App component
