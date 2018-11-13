@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import classes from './App.module.css'; // using the module.css feature to style. 'classes' can be any variable name that makes contextual sense.
 import Person from './Person/Person';
 
 class App extends Component {
@@ -70,28 +70,27 @@ class App extends Component {
       style.backgroundColor = 'red';
     };
 
-    let classes = []; // classes in app.css; returns "red bold"
+    let assignClasses = []; // classes in app.css; returns "red bold"
     if (this.state.persons.length <= 2) {
-      classes.push('red'); // ['red']
+      assignClasses.push(classes.red); // ['red']
     }
     if (this.state.persons.length <= 1) {
-      classes.push('bold'); // ['red', 'bold']
+      assignClasses.push(classes.bold); // ['red', 'bold']
     }
 
     return (
-
-        <div className="App">
-          <h1>Hi! I'm a react app!</h1>
-          <p className={classes.join(' ')}>This really works!</p>
-          <button 
-            style={style}
-            onClick={this.togglePersonHandler}>Toggle Persons
-          </button>
-          {persons}
-        </div>
+      <div className={classes.App}>
+        <h1>Hi! I'm a react app!</h1>
+        <p className={ assignClasses.join(' ')}>This really works!</p>
+        <button 
+          style={style}
+          onClick={this.togglePersonHandler}>Toggle Persons
+        </button>
+        {persons}
+      </div>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi, I\'m a React App)) // Takes at least three parameters: 1. element to render to DOM 2. Config for element in JS 3. Children of element 4... content in element
   }
 }
 
-export default App; // Radium "higher order component" wrapping the App component
+export default App;
