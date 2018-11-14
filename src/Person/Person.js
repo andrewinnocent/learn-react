@@ -6,6 +6,11 @@ import classes from './Person.module.css';
 const person = (props) => {
     // Output dynamic content within JSX. It must be wrapped in {}.
   
+    const random = Math.random();
+
+    if (random > 0.7) {
+        throw new Error('Something went wrong!');
+    }
 
     return (
         <div className={classes.Person}>

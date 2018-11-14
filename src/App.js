@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classes from './App.module.css'; // using the module.css feature to style. 'classes' can be any variable name that makes contextual sense.
 import Person from './Person/Person';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
 class App extends Component {
   // 'state' (reserved word) is ONLY in classes that extend Component (class-based components).
@@ -50,12 +51,12 @@ class App extends Component {
       persons = (
         <div>
           {this.state.persons.map((person, index) => {
-            return <Person
+            return <ErrorBoundary key={person.id}> {/* .map() requires that the key prop is on the outer element. */}
+              <Person
               click={() => this.deletePersonHandler(index)}
               name={person.name}
               age={person.age}
-              key={person.id}
-              changed={(e) => this.switchNameHandler(e, person.id)} />
+              changed={(e) => this.switchNameHandler(e, person.id)} /></ErrorBoundary>
           })}
         </div>
       );
