@@ -42,16 +42,9 @@ class App extends Component {
   }
 
   render() {
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer',
-    };
 
     let persons = null;
+    let btnClass = '';
 
     if (this.state.showPersons) {
       persons = (
@@ -66,8 +59,8 @@ class App extends Component {
           })}
         </div>
       );
-      // Changes button backgroundColor dynamically with showPersons status
-      style.backgroundColor = 'red';
+
+      btnClass = classes.Red;
     };
 
     let assignClasses = []; // classes in app.css; returns "red bold"
@@ -82,8 +75,8 @@ class App extends Component {
       <div className={classes.App}>
         <h1>Hi! I'm a react app!</h1>
         <p className={ assignClasses.join(' ')}>This really works!</p>
-        <button 
-          style={style}
+        <button
+          className={btnClass} 
           onClick={this.togglePersonHandler}>Toggle Persons
         </button>
         {persons}
