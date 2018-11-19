@@ -4,8 +4,12 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
-  // 'state' (reserved word) is ONLY in classes that extend Component (class-based components).
-  state = {
+  constructor(props) { // base constructor is always called with props
+    super(props); // always called in base constructor.
+    console.log('App.js inside constructor:', props);
+
+    // 'state' (reserved word) is ONLY in classes that extend Component (class-based components).
+    this.state = {
     persons: [
       {id: 'dkfj12', name: 'Andrew', age: 32},
       {id: '23xdi2', name: 'Rachelle', age: 25},
@@ -13,6 +17,16 @@ class App extends Component {
     ],
     showPersons: false
   }
+  }
+
+  componentWillMount() {
+    console.log('App.js insided componentWillMount()');
+  }
+
+  componentDidMount() {
+    console.log('App.js insided componentDidMount()');
+  }
+
 
   switchNameHandler = (e, id) => {
     const personIndex = this.state.persons.findIndex(p => {
@@ -43,7 +57,7 @@ class App extends Component {
   }
 
   render() {
-
+    console.log('App.js inside render()');
     let persons = null;
     
     if (this.state.showPersons) {
