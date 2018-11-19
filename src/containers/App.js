@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classes from './App.module.css'; // using the module.css feature to style. 'classes' can be any variable name that makes contextual sense.
-import Person from './Person/Person';
-import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
   // 'state' (reserved word) is ONLY in classes that extend Component (class-based components).
@@ -45,41 +45,24 @@ class App extends Component {
   render() {
 
     let persons = null;
-    let btnClass = '';
-
+    
     if (this.state.showPersons) {
       persons = (
-        <div>
-          {this.state.persons.map((person, index) => {
-            return <ErrorBoundary key={person.id}> {/* .map() requires that the key prop is on the outer element. */}
-              <Person
-              click={() => this.deletePersonHandler(index)}
-              name={person.name}
-              age={person.age}
-              changed={(e) => this.switchNameHandler(e, person.id)} /></ErrorBoundary>
-          })}
-        </div>
+        <Persons
+          persons={this.state.persons}
+          clicked={this.deletePersonHandler}
+          changed={this.switchNameHandler} />
       );
-
-      btnClass = classes.Red;
     };
-
-    let assignClasses = []; // classes in app.css; returns "red bold"
-    if (this.state.persons.length <= 2) {
-      assignClasses.push(classes.red); // ['red']
-    }
-    if (this.state.persons.length <= 1) {
-      assignClasses.push(classes.bold); // ['red', 'bold']
-    }
 
     return (
       <div className={classes.App}>
-        <h1>Hi! I'm a react app!</h1>
-        <p className={ assignClasses.join(' ')}>This really works!</p>
-        <button
-          className={btnClass} 
-          onClick={this.togglePersonHandler}>Toggle Persons
-        </button>
+      {/* Example of receiving props in class-based components. 'Props' is a property of 'Component' just like 'state'. */}
+        <Cockpit
+          appTitle={this.props.title}
+          persons={this.state.persons}
+          showPersons={this.state.showPersons}
+          clicked={this.togglePersonHandler} />
         {persons}
       </div>
     );
