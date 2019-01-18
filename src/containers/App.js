@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import classes from './App.module.css'; // using the module.css feature to style. 'classes' can be any variable name that makes contextual sense.
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 
-class App extends Component {
+class App extends PureComponent {
   constructor(props) { // base constructor is always called with props
     super(props); // always called in base constructor.
     console.log('App.js inside constructor:', props);
@@ -20,24 +20,25 @@ class App extends Component {
   }
 
   componentWillMount() {
-    console.log('App.js insided componentWillMount()');
+    console.log('App.js inside componentWillMount()');
   }
 
   componentDidMount() {
-    console.log('App.js insided componentDidMount()');
+    console.log('App.js inside componentDidMount()');
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log('UPDATE App.js insided shouldComponentUpdate()', nextProps, nextState);
-    return true; // Update continues
-  }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log('UPDATE App.js inside shouldComponentUpdate()', nextProps, nextState);
+  //   return nextState.persons !== this.state.persons ||
+  //     nextState.showPersons !== this.state.showPersons;
+  // }
 
   componentWillUpdate(nextProps, nextState) {
-    console.log('UPDATE App.js insided componentWillUpdate()', nextProps, nextState);
+    console.log('UPDATE App.js inside componentWillUpdate()', nextProps, nextState);
   }
 
   componentDidUpdate() {
-    console.log('UPDATE App.js insided componentDidUpdate()');
+    console.log('UPDATE App.js inside componentDidUpdate()');
   }
 
 
@@ -84,6 +85,7 @@ class App extends Component {
 
     return (
       <div className={classes.App}>
+        <button onClick={() => {this.setState({showPersons: true})}}>Show Persons</button>
       {/* Example of receiving props in class-based components. 'Props' is a property of 'Component' just like 'state'. */}
         <Cockpit
           appTitle={this.props.title}

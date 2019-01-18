@@ -1,37 +1,40 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import Person from './Person/Person';
 
-class Persons extends Component {
+class Persons extends PureComponent {
   constructor(props) { // base constructor is always called with props
     super(props); // always called in base constructor.
     console.log('Persons.js inside constructor:', props);
   }
 
   componentWillMount() {
-    console.log('Persons.js insided componentWillMount()');
+    console.log('Persons.js inside componentWillMount()');
   }
 
   componentDidMount() {
-    console.log('Persons.js insided componentDidMount()');
+    console.log('Persons.js inside componentDidMount()');
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('UPDATE Persons.js insided componentWillReceiveProps()', nextProps);
+    console.log('UPDATE Persons.js inside componentWillReceiveProps()', nextProps);
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log('UPDATE Persons.js insided shouldComponentUpdate()', nextProps, nextState);
-    return nextProps.persons !== this.props.persons;
-    // return false; // Update happens, but it isn't rendered to the DOM
-    // return true; // Update continues
-  }
+  // PureComponent has shouldComponentUpdate built-in.
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log('UPDATE Persons.js inside shouldComponentUpdate()', nextProps, nextState);
+  //   return nextProps.persons !== this.props.persons ||
+  //   nextProps.changed !== this.props.changed ||
+  //   nextProps.clicked !== this.props.clicked;
+  //   // return false; // Update happens, but it isn't rendered to the DOM
+  //   // return true; // Update continues
+  // }
 
   componentWillUpdate(nextProps, nextState) {
-    console.log('UPDATE Persons.js insided componentWillUpdate()', nextProps, nextState);
+    console.log('UPDATE Persons.js inside componentWillUpdate()', nextProps, nextState);
   }
 
   componentDidUpdate() {
-    console.log('UPDATE Persons.js insided componentDidUpdate()');
+    console.log('UPDATE Persons.js inside componentDidUpdate()');
   }
 
   render () {
