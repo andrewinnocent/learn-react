@@ -17,7 +17,8 @@ class App extends PureComponent {
       {id: '23xdi2', name: 'Rachelle', age: 25},
       {id: 'ddkfj2', name: 'Drew', age: 30}
     ],
-    showPersons: false
+    showPersons: false,
+    toggleClicked: 0
   }
   }
 
@@ -69,7 +70,13 @@ class App extends PureComponent {
 
   togglePersonHandler = () => {
     const doesShow = this.state.showPersons;
-    this.setState({showPersons: !doesShow});
+    // setState is a method executed asynchronously. So be careful when having multiple setStates. In those cases, use the following:
+    this.setState(prevState => {
+      return {
+        showPersons: !doesShow,
+        toggleClicked: prevState.toggleClicked + 1 // prevState can't be mutated anywhere else in the app while in this setState method. It is the last modified state in the current lifecycle. Therefore it is safe to update the state here.
+      }
+    })
   }
 
   render() {
