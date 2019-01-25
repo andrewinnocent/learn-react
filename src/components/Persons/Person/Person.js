@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import classes from './Person.module.css';
-import WithClass from '../../../hoc/WithClass';
+import Aux from '../../../hoc/Aux';
+import withClass from '../../../hoc/withClass';
 
 class Person extends Component {
     constructor(props) { // base constructor is always called with props
@@ -19,13 +20,13 @@ class Person extends Component {
     render () {
         console.log('Person.js inside render()');
         return (
-            <WithClass classes={classes.Person}>
+            <Aux classes={classes.Person}>
                 <p onClick={this.props.click}>I'm {this.props.name} and I am {this.props.age} years old!</p>
                 <p>{this.props.children}</p> {/* children is a reserved word in JSX. This will access content placed between open/close tags of the component. */}
                 <input type='text' onChange={this.props.changed} value={this.props.name}/> {/* Two-way binding: update the state (onChange) and see the current state (value) */}
-            </WithClass>
+            </Aux>
         )
     }
 }
 
-export default Person;
+export default withClass(Person, classes.Person);

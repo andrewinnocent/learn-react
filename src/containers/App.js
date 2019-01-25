@@ -2,7 +2,8 @@ import React, { PureComponent } from 'react';
 import classes from './App.module.css'; // using the module.css feature to style. 'classes' can be any variable name that makes contextual sense.
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
-import WithClass from '../hoc/WithClass';
+import Aux from '../hoc/Aux';
+import withClass from '../hoc/withClass';
 
 class App extends PureComponent {
   constructor(props) { // base constructor is always called with props
@@ -85,7 +86,7 @@ class App extends PureComponent {
     };
 
     return (
-      <WithClass classes={classes.App}>
+      <Aux classes={classes.App}>
         <button onClick={() => {this.setState({showPersons: true})}}>Show Persons</button>
         {/* Example of receiving props in class-based components. 'Props' is a property of 'Component' just like 'state'. */}
         <Cockpit
@@ -94,10 +95,10 @@ class App extends PureComponent {
           showPersons={this.state.showPersons}
           clicked={this.togglePersonHandler} />
         {persons}
-      </WithClass>
+      </Aux>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi, I\'m a React App)) // Takes at least three parameters: 1. element to render to DOM 2. Config for element in JS 3. Children of element 4... content in element
   }
 }
 
-export default App;
+export default withClass(App, classes.App);

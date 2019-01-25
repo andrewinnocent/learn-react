@@ -1,12 +1,31 @@
-import React from 'react';
+import React, {Component} from 'react';
 
 // Example of a Higher Order Component that would wrap other component elements.
 // The purpose of this one is to reuse div elements with className
+// This is a normal javascript function returning a functional component
 
-const withClass = (props) => (
-  <div className={props.classes}> {/* When using this hoc, it expects 'classes' as a property, e.g., classes={Cat} */}
-    {props.children} {/* When using this hoc, it expects element children */}
-  </div>
-);
+// const withClass = (WrappedComponent, className) => {
+// {/* This is a normal javascript function returning a functional component */}
+//   return (props) => (
+//     <div className={className}> {/* When using this hoc, it expects 'classes' as a property, e.g., classes={Cat} */}
+//       {/* Pass on the props as you get them with the spread operator here: {...props} This is needed when wrapping this hoc with different stateful components. */}
+//       <WrappedComponent {...props}/>
+//     </div>
+//   );
+// };
+
+const withClass = (WrappedComponent, className) => {
+  {/* This is a normal javascript function returning a stateful component. It's a nameless class */}
+  return class extends Component {
+    render () {
+      return (
+        <div className={className}> {/* When using this hoc, it expects 'classes' as a property, e.g., classes={Cat} */}
+          {/* Pass on the props as you get them with the spread operator here: {...props} This is needed when using this hoc with different stateful components. */}
+          <WrappedComponent {...this.props}/>
+        </div>
+      )
+    }
+  }
+};
 
 export default withClass;
