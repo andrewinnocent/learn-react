@@ -17,6 +17,9 @@ class Person extends Component {
     
       componentDidMount() {
         console.log('Person.js insided componentDidMount()');
+        if (this.props.position === 0) {
+            this.inputElement.focus()
+        }
       }
 
     render () {
@@ -25,7 +28,12 @@ class Person extends Component {
             <Aux classes={classes.Person}>
                 <p onClick={this.props.click}>I'm {this.props.name} and I am {this.props.age} years old!</p>
                 <p>{this.props.children}</p> {/* children is a reserved word in JSX. This will access content placed between open/close tags of the component. */}
-                <input type='text' onChange={this.props.changed} value={this.props.name}/> {/* Two-way binding: update the state (onChange) and see the current state (value) */}
+                {/* "ref" is built-in, like "key", best for controlling input focus or media playback. NOT a styling shortcut. */}
+                <input
+                    ref={(input) => { this.inputElement = input }}
+                    type='text'
+                    onChange={this.props.changed}
+                    value={this.props.name} /> {/* Two-way binding: update the state (onChange) and see the current state (value) */}
             </Aux>
         )
     }
