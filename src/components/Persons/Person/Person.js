@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import classes from './Person.module.css';
 import Aux from '../../../hoc/Aux';
 import withClass from '../../../hoc/withClass';
+import {AuthContext} from '../../../containers/App'
 
 class Person extends Component {
     constructor(props) { // base constructor is always called with props
@@ -26,11 +27,16 @@ class Person extends Component {
     focus() {
         this.inputElement.current.focus()
     }
-    
+
     render () {
         console.log('Person.js inside render()');
         return (
             <Aux classes={classes.Person}>
+            {/* Consumer component of the context being passed */}
+            <AuthContext.Consumer>
+                {/* React knows which property is represented by "auth" */}
+                {auth => auth ? <p>I'm authenticated!</p> : null}
+            </AuthContext.Consumer>
                 <p onClick={this.props.click}>I'm {this.props.name} and I am {this.props.age} years old!</p>
                 <p>{this.props.children}</p> {/* children is a reserved word in JSX. This will access content placed between open/close tags of the component. */}
                 {/* "ref" is built-in, like "key", best for controlling input focus or media playback. NOT a styling shortcut. */}

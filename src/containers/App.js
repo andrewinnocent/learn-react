@@ -5,6 +5,9 @@ import Cockpit from '../components/Cockpit/Cockpit';
 import Aux from '../hoc/Aux';
 import withClass from '../hoc/withClass';
 
+// Creates a global context that can be passed to any component. In this case the value is false.
+export const AuthContext = React.createContext(false);
+
 class App extends PureComponent {
   constructor(props) { // base constructor is always called with props
     super(props); // always called in base constructor.
@@ -18,7 +21,8 @@ class App extends PureComponent {
       {id: 'ddkfj2', name: 'Drew', age: 30}
     ],
     showPersons: false,
-    toggleClicked: 0
+    toggleClicked: 0,
+    authenticated: false
   }
   }
 
@@ -79,6 +83,10 @@ class App extends PureComponent {
     })
   }
 
+  loginHandler = () => {
+    this.setState({authenticated: true});
+  }
+
   render() {
     console.log('App.js inside render()');
     let persons = null;
@@ -88,7 +96,8 @@ class App extends PureComponent {
         <Persons
           persons={this.state.persons}
           clicked={this.deletePersonHandler}
-          changed={this.switchNameHandler} />
+          changed={this.switchNameHandler}
+          />
       );
     };
 
@@ -100,8 +109,13 @@ class App extends PureComponent {
           appTitle={this.props.title}
           persons={this.state.persons}
           showPersons={this.state.showPersons}
-          clicked={this.togglePersonHandler} />
-        {persons}
+          clicked={this.togglePersonHandler}
+          login={this.loginHandler} />
+          {/* Provides global context to child components. */}
+          <AuthContext.Provider value={this.state.authenticated}>
+            {persons}
+          </AuthContext.Provider>
+
       </Aux>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi, I\'m a React App)) // Takes at least three parameters: 1. element to render to DOM 2. Config for element in JS 3. Children of element 4... content in element
