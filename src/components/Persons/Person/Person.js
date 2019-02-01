@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+
 import classes from './Person.module.css';
 import Aux from '../../../hoc/Aux';
 import withClass from '../../../hoc/withClass';
@@ -28,5 +30,14 @@ class Person extends Component {
         )
     }
 }
+
+// Useful when working in teams, propTypes (Typechecking) sets rules for what's expected to be passed as a property. Validation errors are shown in the Console.
+// Only used on classes
+Person.propTypes = {
+    click: PropTypes.func,
+    name: PropTypes.string,
+    age: PropTypes.number,
+    changed: PropTypes.func
+};
 
 export default withClass(Person, classes.Person);
