@@ -16,16 +16,19 @@ import React, {Component} from 'react';
 
 const withClass = (WrappedComponent, className) => {
   {/* This is a normal javascript function returning a stateful component. It's a nameless class */}
-  return class extends Component {
+  const WithCLass = class extends Component {
     render () {
       return (
         <div className={className}> {/* When using this hoc, it expects 'classes' as a property, e.g., classes={Cat} */}
           {/* Pass on the props as you get them with the spread operator here: {...props} This is needed when using this hoc with different stateful components. */}
-          <WrappedComponent {...this.props}/>
+          <WrappedComponent ref={this.props.forwardedRef} {...this.props}/>
         </div>
       )
     }
   }
+  return React.forwardRef((props, ref) => {
+    return <WithCLass {...props} forwardedRef={ref} />
+  })
 };
 
 export default withClass;

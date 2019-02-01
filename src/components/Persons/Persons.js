@@ -5,6 +5,7 @@ class Persons extends PureComponent {
   constructor(props) { // base constructor is always called with props
     super(props); // always called in base constructor.
     console.log('Persons.js inside constructor:', props);
+    this.lastPersonRef = React.createRef();
   }
 
   componentWillMount() {
@@ -13,6 +14,7 @@ class Persons extends PureComponent {
 
   componentDidMount() {
     console.log('Persons.js inside componentDidMount()');
+      this.lastPersonRef.current.focus();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -45,6 +47,7 @@ class Persons extends PureComponent {
       name={person.name}
       age={person.age}
       position={index}
+      ref={this.lastPersonRef}
       key={person.id}
       changed={(e) => this.props.changed(e, person.id)} />
     })
